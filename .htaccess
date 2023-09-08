@@ -1,0 +1,7 @@
+RewriteEngine On # Turn on the rewriting engine
+RewriteRule ^api/login/?$ web.php?page=login [NC,L]
+RewriteRule ^api/employees/?$ web.php [NC,L]
+RewriteRule ^api/employee/([0-9]+)/?$ web.php?nrp=$1 [NC,L]
+RewriteRule ^api/employee/insert/?$ web.php [NC,L]
+RewriteRule ^api/employee/update/([0-9]+)/?$ web.php?nrp=$1 [NC,L]
+RewriteRule ^api/employee/delete/([0-9]+)/?$ web.php?nrp=$1 [NC,L]
