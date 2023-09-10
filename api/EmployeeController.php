@@ -13,26 +13,25 @@ class EmployeeController
 
     public function index()
     {
-
-        // $header = getallheaders();
-        // if(!isset($header['Authorization'])) {
-        //     http_response_code(401);
-        //     echo json_encode([
-        //         'status' => false,
-        //         'message' => 'Unauthenticated'
-        //     ]);
-        //     exit();
-        // }
+        $header = getallheaders();
+        if(!isset($header['Authorization'])) {
+            http_response_code(401);
+            echo json_encode([
+                'status' => false,
+                'message' => 'Unauthenticated'
+            ]);
+            exit();
+        }
 
         require_once('config.php');
 
-        // $headers = getallheaders();
+        $headers = getallheaders();
 
-        // try {
-        // $secretKey = $this->secretKey;
-        // list(, $token) = explode(' ', $headers['Authorization']);
+        try {
+        $secretKey = $this->secretKey;
+        list(, $token) = explode(' ', $headers['Authorization']);
 
-        // $jwtDecoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+        $jwtDecoded = JWT::decode($token, new Key($secretKey, 'HS256'));
 
         $query = "SELECT a.nrp, a.nama, a.jabatan, b.nama_departemen, a.tanggal_lahir, a.alamat, a.email, a.no_telepon, a.role, a.avatar FROM employees a join departements b on a.id_departemen = b.id_departemen;";
         $sql = mysqli_query($conn, $query);
@@ -53,9 +52,9 @@ class EmployeeController
                 'data' => $data
             ]);
         }
-        // } catch (Exception $e) {
-        //     echo $e;
-        // }
+        } catch (Exception $e) {
+            echo $e;
+        }
 
     }
 
